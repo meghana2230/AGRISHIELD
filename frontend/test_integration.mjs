@@ -1,5 +1,7 @@
 import fs from 'fs';
 
+const API_BASE_URL = process.env.VITE_API_BASE_URL || 'https://agrishield-backend.onrender.com';
+
 async function sendPredict(filename, buffer) {
   const boundary = '----WebKitFormBoundary' + Math.random().toString(16).substring(2);
   const header = Buffer.from(
@@ -10,7 +12,7 @@ async function sendPredict(filename, buffer) {
   const footer = Buffer.from(`\r\n--${boundary}--\r\n`);
   const payload = Buffer.concat([header, buffer, footer]);
 
-  return await fetch('http://127.0.0.1:8000/predict', {
+  return await fetch(`${API_BASE_URL}/predict`, {
     method: 'POST',
     headers: {
       'Content-Type': `multipart/form-data; boundary=${boundary}`,
@@ -24,7 +26,7 @@ async function runTests() {
 
   // Test 1: Health
   console.log('[Test 1] GET /health');
-  const healthRes = await fetch('http://127.0.0.1:8000/health');
+  const healthRes = await fetch(`${API_BASE_URL}/health`);
   const healthData = await healthRes.json();
   console.log('Status:', healthRes.status, '| Health:', healthData.status, '| Model:', healthData.model_name);
   if (healthRes.status !== 200 || !healthData.model_loaded) throw new Error('Health check failed');
@@ -57,7 +59,7 @@ async function runTests() {
 
   // Test 4: Error handling - corrupted/unsupported file
   console.log('\n[Test 4] Error Handling: POST /predict with invalid extension test.txt');
-  const invalidRes = await fetch('http://127.0.0.1:8000/predict', {
+  const invalidRes = await fetch(`${API_BASE_URL}/predict`, {
     method: 'POST',
     headers: {
       'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary123',

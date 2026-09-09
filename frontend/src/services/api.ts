@@ -5,9 +5,9 @@
 
 import type { PredictionResponse, HealthResponse } from '../types/api';
 
-// Configurable API base URL defaulting to standard local dev backend
+// Configurable API base URL defaulting to deployed Render backend
 export const API_BASE_URL: string =
-  import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+  import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'https://agrishield-backend.onrender.com';
 
 const MAX_IMAGE_SIZE_BYTES = 15 * 1024 * 1024; // 15 MB
 const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
