@@ -1,0 +1,65 @@
+# Virtual Environments
+venv/
+ml-model/venv/
+env/
+.venv/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+
+# Node & Frontend Build Artifacts
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Environment Variables & Secrets (Preserve .env.example templates)
+.env
+.env.local
+.env.*.local
+frontend/.env
+frontend/.env.local
+!**/.env.example
+!.env.example
+
+# Dataset Files (Keep manifest structure, ignore large raw imagery)
+ml-model/dataset/raw/*
+!ml-model/dataset/raw/.gitkeep
+ml-model/dataset/processed/*
+!ml-model/dataset/processed/.gitkeep
+!ml-model/dataset/processed/train.csv
+!ml-model/dataset/processed/val.csv
+!ml-model/dataset/processed/test.csv
+*.zip
+*.tar.gz
+*.tar
+
+# Model Checkpoints & Large Weights
+ml-model/models/checkpoints/*
+!ml-model/models/checkpoints/.gitkeep
+# Preserve required production model artifact
+!ml-model/models/best_model.pth
+!ml-model/models/.gitkeep
+
+# Temporary Uploads
+ml-model/uploads/*
+!ml-model/uploads/.gitkeep
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Outputs & Temporary Logs
+ml-model/outputs/*
+!ml-model/outputs/.gitkeep
+*.log
+
+# IDE & OS Specific
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
